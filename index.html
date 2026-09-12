@@ -593,8 +593,10 @@
       const lector = new FileReader();
 
       lector.onload = function (e) {
-        fotosActuales.push(e.target.result);
-        renderGaleria();
+        comprimirImagen(e.target.result, function (dataUrlComprimida) {
+          fotosActuales.push(dataUrlComprimida);
+          renderGaleria();
+        });
       };
 
       lector.readAsDataURL(archivo);
@@ -602,6 +604,51 @@
     };
 
     input.click();
+
+  }
+
+
+  // Reduce la foto a máx. 1280px de lado y calidad 0.65 antes de
+  // guardarla: una foto de celular (3-5 MB) queda en ~150-350 KB,
+  // que es lo que realmente hace lento el guardado (sube por la red
+  // móvil y Apps Script tiene que decodificarla).
+  function comprimirImagen(dataUrlOriginal, callback) {
+
+    const MAX_LADO = 1280;
+    const CALIDAD = 0.65;
+
+    const img = new Image();
+
+    img.onload = function () {
+
+      let ancho = img.width;
+      let alto = img.height;
+
+      if (ancho > alto && ancho > MAX_LADO) {
+        alto = Math.round(alto * (MAX_LADO / ancho));
+        ancho = MAX_LADO;
+      } else if (alto > MAX_LADO) {
+        ancho = Math.round(ancho * (MAX_LADO / alto));
+        alto = MAX_LADO;
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = ancho;
+      canvas.height = alto;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, ancho, alto);
+
+      callback(canvas.toDataURL("image/jpeg", CALIDAD));
+
+    };
+
+    img.onerror = function () {
+      // Si algo falla comprimiendo, se manda la original antes que perder la foto
+      callback(dataUrlOriginal);
+    };
+
+    img.src = dataUrlOriginal;
 
   }
 
