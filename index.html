@@ -1,794 +1,770 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Flujo de Taller</title>
+  <title>Flujo de Taller</title>
 
-    <style>
-      * {
-        box-sizing: border-box;
-      }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f3f4f6;
-        color: #111827;
-      }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
 
-      header {
-        background: #111827;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
+    header {
+      background: #111827;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
 
-      header h1 {
-        margin: 0;
-        font-size: 24px;
-      }
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
 
-      header p {
-        margin: 6px 0 0;
-        opacity: 0.8;
-      }
+    header p {
+      margin: 6px 0 0;
+      opacity: 0.8;
+    }
 
-      main {
-        max-width: 500px;
-        margin: auto;
-        padding: 20px;
-      }
+    main {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
 
-      .titulo {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 15px;
-      }
+    .titulo {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
 
-      .etapas {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
+    .etapas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
 
-      button {
-        border: none;
-        border-radius: 14px;
-        padding: 18px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        font-family: inherit;
-      }
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 18px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: inherit;
+    }
 
-      .etapa {
-        background: white;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-      }
+    .etapa {
+      background: white;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
 
-      .etapa:hover {
-        transform: scale(1.02);
-      }
+    .etapa:hover {
+      transform: scale(1.02);
+    }
 
-      .formulario {
-        display: none;
-        margin-top: 20px;
-        background: white;
-        padding: 20px;
-        border-radius: 16px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-      }
+    .formulario {
+      display: none;
+      margin-top: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
 
-      label {
-        display: block;
-        margin-top: 15px;
-        margin-bottom: 6px;
-        font-weight: bold;
-      }
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
 
-      input,
-      textarea {
-        width: 100%;
-        padding: 13px;
-        border: 1px solid #d1d5db;
-        border-radius: 10px;
-        font-size: 16px;
-        font-family: inherit;
-      }
+    input,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: inherit;
+    }
 
-      textarea {
-        min-height: 80px;
-        resize: vertical;
-      }
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
 
-      .bloque-checklist {
-        margin-top: 22px;
-        padding-top: 14px;
-        border-top: 2px solid #e5e7eb;
-      }
+    .bloque-checklist {
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 2px solid #e5e7eb;
+    }
 
-      .bloque-checklist h3 {
-        margin: 0 0 10px;
-        font-size: 15px;
-        color: #1c4587;
-      }
+    .bloque-checklist h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: #1c4587;
+    }
 
-      .pregunta {
-        margin-top: 14px;
-      }
+    .pregunta {
+      margin-top: 14px;
+    }
 
-      .pregunta p {
-        margin: 0 0 8px;
-        font-size: 14px;
-        line-height: 1.35;
-      }
+    .pregunta p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
 
-      .opciones {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 6px;
-      }
+    .opciones {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+    }
 
-      .opcion-btn {
-        padding: 10px 4px;
-        font-size: 12px;
-        border-radius: 8px;
-        background: #f3f4f6;
-        color: #374151;
-        border: 1px solid #d1d5db;
-      }
+    .opcion-btn {
+      padding: 10px 4px;
+      font-size: 12px;
+      border-radius: 8px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
 
-      .opcion-btn.si.activo {
-        background: #16a34a;
-        color: white;
-        border-color: #16a34a;
-      }
+    .opcion-btn.si.activo {
+      background: #16a34a;
+      color: white;
+      border-color: #16a34a;
+    }
 
-      .opcion-btn.no.activo {
-        background: #dc2626;
-        color: white;
-        border-color: #dc2626;
-      }
+    .opcion-btn.no.activo {
+      background: #dc2626;
+      color: white;
+      border-color: #dc2626;
+    }
 
-      .opcion-btn.na.activo {
-        background: #6b7280;
-        color: white;
-        border-color: #6b7280;
-      }
+    .opcion-btn.na.activo {
+      background: #6b7280;
+      color: white;
+      border-color: #6b7280;
+    }
 
-      .btn-camara {
-        width: 100%;
-        margin-top: 20px;
-        background: #2563eb;
-        color: white;
-      }
+    .btn-camara {
+      width: 100%;
+      margin-top: 20px;
+      background: #2563eb;
+      color: white;
+    }
 
-      .btn-guardar {
-        width: 100%;
-        margin-top: 15px;
-        background: #16a34a;
-        color: white;
-      }
+    .btn-guardar {
+      width: 100%;
+      margin-top: 15px;
+      background: #16a34a;
+      color: white;
+    }
 
-      .btn-guardar:disabled {
-        background: #86efac;
-        cursor: not-allowed;
-      }
+    .btn-guardar:disabled {
+      background: #86efac;
+      cursor: not-allowed;
+    }
 
-      .btn-volver {
-        width: 100%;
-        margin-top: 10px;
-        background: #6b7280;
-        color: white;
-      }
+    .btn-volver {
+      width: 100%;
+      margin-top: 10px;
+      background: #6b7280;
+      color: white;
+    }
 
-      #fotoPreview {
-        width: 100%;
-        margin-top: 15px;
-        border-radius: 12px;
-        display: none;
-      }
+    #fotoPreview {
+      display: none;
+    }
 
-      .mensaje {
-        margin-top: 15px;
-        padding: 12px;
-        border-radius: 10px;
-        background: #dcfce7;
-        color: #166534;
-        display: none;
-      }
+    .fotos-galeria {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
 
-      .mensaje.error {
-        background: #fee2e2;
-        color: #991b1b;
-      }
-    </style>
-  </head>
+    .foto-item {
+      position: relative;
+      width: 78px;
+      height: 78px;
+    }
 
-  <body>
-    <header>
-      <h1>🚗 Flujo de Taller</h1>
-      <p>Manchay</p>
-    </header>
+    .foto-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+    }
 
-    <main>
-      <div id="menu">
-        <div class="titulo">Selecciona una etapa</div>
+    .foto-item .quitar-foto {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border-radius: 50%;
+      background: #dc2626;
+      color: white;
+      font-size: 12px;
+      line-height: 1;
+    }
 
-        <div class="etapas">
-          <button class="etapa" onclick="abrirEtapa('RONDA')">📋 RONDA</button>
+    .mensaje {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #dcfce7;
+      color: #166534;
+      display: none;
+    }
 
-          <button class="etapa" onclick="abrirEtapa('PLANCHADO')">
-            🔨 PLANCHADO
-          </button>
+    .mensaje.error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+  </style>
+</head>
 
-          <button class="etapa" onclick="abrirEtapa('PREPARACION')">
-            🎨 PREPARACIÓN
-          </button>
+<body>
 
-          <button class="etapa" onclick="abrirEtapa('PULIDO')">
-            ✨ PULIDO
-          </button>
+<header>
+  <h1>🚗 Flujo de Taller</h1>
+  <p>Manchay</p>
+</header>
 
-          <button class="etapa" onclick="abrirEtapa('ARMADO')">
-            🔧 ARMADO
-          </button>
+<main>
 
-          <button class="etapa" onclick="abrirEtapa('CALIDAD')">
-            ✅ CALIDAD
-          </button>
-        </div>
-      </div>
+  <div id="menu">
 
-      <div id="formulario" class="formulario">
-        <div class="titulo">
-          <span id="nombreEtapa"></span>
-        </div>
+    <div class="titulo">
+      Selecciona una etapa
+    </div>
 
-        <label>Placa</label>
-        <input type="text" id="placa" placeholder="Ejemplo: ABC-123" />
+    <div class="etapas">
 
-        <label>Responsable</label>
-        <input
-          type="text"
-          id="responsable"
-          placeholder="Nombre del responsable"
-        />
+      <button class="etapa" onclick="abrirEtapa('RONDA')">
+        📋 RONDA
+      </button>
 
-        <!-- Para RONDA (registro simple) -->
-        <div id="bloqueSimple">
-          <label>Observación</label>
-          <textarea
-            id="observacionSimple"
-            placeholder="Escribe una observación..."
-          ></textarea>
-        </div>
+      <button class="etapa" onclick="abrirEtapa('PLANCHADO')">
+        🔨 PLANCHADO
+      </button>
 
-        <!-- Para etapas con checklist de calidad: se llena por JS -->
-        <div id="bloqueChecklist"></div>
+      <button class="etapa" onclick="abrirEtapa('PREPARACION')">
+        🎨 PREPARACIÓN
+      </button>
 
-        <button class="btn-camara" onclick="abrirCamara()">
-          📷 Tomar foto
-        </button>
+      <button class="etapa" onclick="abrirEtapa('PULIDO')">
+        ✨ PULIDO
+      </button>
 
-        <img id="fotoPreview" alt="Foto tomada" />
+      <button class="etapa" onclick="abrirEtapa('ARMADO')">
+        🔧 ARMADO
+      </button>
 
-        <button class="btn-guardar" id="btnGuardar" onclick="guardarRegistro()">
-          💾 Guardar
-        </button>
+      <button class="etapa" onclick="abrirEtapa('CALIDAD')">
+        ✅ CALIDAD
+      </button>
 
-        <button class="btn-volver" onclick="volverMenu()">← Volver</button>
+    </div>
 
-        <div id="mensaje" class="mensaje">Registro guardado correctamente.</div>
-      </div>
-    </main>
+  </div>
 
-    <script>
-      // ⚠️ PEGA AQUÍ LA URL DE TU WEB APP DE APPS SCRIPT (Code.gs)
-      // La obtienes al hacer: Implementar → Nueva implementación → Aplicación web
-      const WEBAPP_URL =
-        'https://script.google.com/macros/s/AKfycbwYP7Llca693OX3Qj2oKiYfhYKln9oqC4b1NHnkJZzuo2bFS8TqM9u5T5JM8WKaN40VDg/exec';
 
-      const OPCIONES_RESPUESTA = [
-        { val: 'si', texto: '✅ Sí', valorSheet: '✅ Sí, lista para pulido' },
-        { val: 'no', texto: '❌ No', valorSheet: '❌ No, requiere corrección' },
-        { val: 'na', texto: 'N/A', valorSheet: 'N/A' },
-      ];
+  <div id="formulario" class="formulario">
 
-      // Configuración de checklists, tomada tal cual de las columnas
-      // reales de RPTA_CALIDAD. Las columnas 49 (CALIDAD), 54 y 55
-      // (PLANCHADO) no tenían texto real de pregunta ("Fila 10", "Fila 6",
-      // "Fila 5") y se dejaron fuera del checklist a pedido del usuario;
-      // esas columnas del Sheet simplemente quedarán vacías al guardar.
-      const ETAPAS = {
-        RONDA: { tipo: 'simple' },
+    <div class="titulo">
+      <span id="nombreEtapa"></span>
+    </div>
 
-        PLANCHADO: {
-          tipo: 'checklist',
-          envios: [
-            {
-              etapaTexto: 'PLANCHADO',
-              colObservacion: 10,
-              preguntas: [
-                {
-                  col: 6,
-                  texto:
-                    '¿Las piezas del compacto están correctamente cuadradas?',
-                },
-                {
-                  col: 7,
-                  texto: '¿La pieza quedó sin arañazos después del planchado?',
-                },
-                {
-                  col: 8,
-                  texto: '¿Qué tan plano está el planchado? Evaluar superficie',
-                },
-                {
-                  col: 9,
-                  texto:
-                    '¿(Parachoque) Funda, guardafango, capó quedaron correctamente cuadrados?',
-                },
-                {
-                  col: 50,
-                  texto: 'Puertas copiloto LH/LD ¿cierre suave y líneas?',
-                },
-                {
-                  col: 51,
-                  texto: '¿Los faros están bien colocados? Máscaras.',
-                },
-                {
-                  col: 52,
-                  texto: 'Revisar puntos de soldadura, ¿están correctos?',
-                },
-                { col: 53, texto: 'Planchado de interiores ¿está todo bien?' },
-              ],
-            },
-          ],
+    <label>Placa</label>
+    <input type="text" id="placa" placeholder="Ejemplo: ABC-123">
+
+    <label>Responsable</label>
+    <input type="text" id="responsable" placeholder="Nombre del responsable">
+
+    <!-- Para RONDA (registro simple) -->
+    <div id="bloqueSimple">
+      <label>Observación</label>
+      <textarea id="observacionSimple" placeholder="Escribe una observación..."></textarea>
+    </div>
+
+    <!-- Para etapas con checklist de calidad: se llena por JS -->
+    <div id="bloqueChecklist"></div>
+
+    <button class="btn-camara" onclick="abrirCamara()">
+      📷 Agregar foto
+    </button>
+
+    <div id="fotosGaleria" class="fotos-galeria"></div>
+
+    <button class="btn-guardar" id="btnGuardar" onclick="guardarRegistro()">
+      💾 Guardar
+    </button>
+
+    <button class="btn-volver" onclick="volverMenu()">
+      ← Volver
+    </button>
+
+    <div id="mensaje" class="mensaje">
+      Registro guardado correctamente.
+    </div>
+
+  </div>
+
+</main>
+
+
+<script>
+
+  // ⚠️ PEGA AQUÍ LA URL DE TU WEB APP DE APPS SCRIPT (Code.gs)
+  // La obtienes al hacer: Implementar → Nueva implementación → Aplicación web
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwYP7Llca693OX3Qj2oKiYfhYKln9oqC4b1NHnkJZzuo2bFS8TqM9u5T5JM8WKaN40VDg/exec";
+
+  const OPCIONES_RESPUESTA = [
+    { val: 'si', texto: '✅ Sí', valorSheet: '✅ Sí, lista para pulido' },
+    { val: 'no', texto: '❌ No', valorSheet: '❌ No, requiere corrección' },
+    { val: 'na', texto: 'N/A',  valorSheet: 'N/A' }
+  ];
+
+  // Configuración de checklists, tomada tal cual de las columnas
+  // reales de RPTA_CALIDAD. Las columnas 49 (CALIDAD), 54 y 55
+  // (PLANCHADO) no tenían texto real de pregunta ("Fila 10", "Fila 6",
+  // "Fila 5") y se dejaron fuera del checklist a pedido del usuario;
+  // esas columnas del Sheet simplemente quedarán vacías al guardar.
+  const ETAPAS = {
+
+    RONDA: { tipo: 'simple' },
+
+    PLANCHADO: {
+      tipo: 'checklist',
+      envios: [
+        {
+          etapaTexto: 'PLANCHADO',
+          colObservacion: 10,
+          preguntas: [
+            { col: 6,  texto: '¿Las piezas del compacto están correctamente cuadradas?' },
+            { col: 7,  texto: '¿La pieza quedó sin arañazos después del planchado?' },
+            { col: 8,  texto: '¿Qué tan plano está el planchado? Evaluar superficie' },
+            { col: 9,  texto: '¿(Parachoque) Funda, guardafango, capó quedaron correctamente cuadrados?' },
+            { col: 50, texto: 'Puertas copiloto LH/LD ¿cierre suave y líneas?' },
+            { col: 51, texto: '¿Los faros están bien colocados? Máscaras.' },
+            { col: 52, texto: 'Revisar puntos de soldadura, ¿están correctos?' },
+            { col: 53, texto: 'Planchado de interiores ¿está todo bien?' }
+          ]
+        }
+      ]
+    },
+
+    PULIDO: {
+      tipo: 'checklist',
+      envios: [
+        {
+          etapaTexto: 'PULIDO',
+          colObservacion: 16,
+          preguntas: [
+            { col: 11, texto: '¿La pieza presenta huellas de la mota de pulir?' },
+            { col: 12, texto: '¿Se pulieron correctamente las zonas de difícil acceso?' },
+            { col: 13, texto: '¿Está correctamente abrillantado?' },
+            { col: 14, texto: '¿Están limpios los filos después del pulido?' },
+            { col: 15, texto: '¿Molduras y emblemas están correctamente instalados?' }
+          ]
+        }
+      ]
+    },
+
+    // Un solo botón "PREPARACIÓN" que muestra ambos bloques seguidos.
+    // Al guardar se generan 2 filas en RPTA_CALIDAD (MATIZADO / COLOR
+    // y PINTURA / HORNO), tal como las clasifica el script de análisis.
+    PREPARACION: {
+      tipo: 'checklist',
+      envios: [
+        {
+          etapaTexto: 'MATIZADO / COLOR',
+          colObservacion: 23,
+          preguntas: [
+            { col: 17, texto: '¿Se verificó el código, color y variante antes de pintar?' },
+            { col: 18, texto: '¿La fórmula utilizada quedó registrada?' },
+            { col: 19, texto: '¿Se realizó la prueba de color antes de pintar?' },
+            { col: 20, texto: '¿El color fue validado antes de pintar?' },
+            { col: 21, texto: '¿El material está correctamente identificado y corresponde a la OT?' },
+            { col: 22, texto: '¿El tono de color quedó correcto, sin exceso de amarillo?' }
+          ]
         },
+        {
+          etapaTexto: 'PINTURA / HORNO',
+          colObservacion: 30,
+          preguntas: [
+            { col: 24, texto: '¿La superficie está limpia antes de pintar?' },
+            { col: 25, texto: '¿La zona quedó correctamente protegida y enmascarada?' },
+            { col: 26, texto: '¿El acabado se ve parejo desde todos los ángulos?' },
+            { col: 27, texto: '¿La pintura quedó pareja y uniforme en toda la superficie?' },
+            { col: 28, texto: '¿El vehículo tuvo el secado/horneado correcto?' },
+            { col: 29, texto: '¿La pieza está lista para pulido?' }
+          ]
+        }
+      ]
+    },
 
-        PULIDO: {
-          tipo: 'checklist',
-          envios: [
-            {
-              etapaTexto: 'PULIDO',
-              colObservacion: 16,
-              preguntas: [
-                {
-                  col: 11,
-                  texto: '¿La pieza presenta huellas de la mota de pulir?',
-                },
-                {
-                  col: 12,
-                  texto:
-                    '¿Se pulieron correctamente las zonas de difícil acceso?',
-                },
-                { col: 13, texto: '¿Está correctamente abrillantado?' },
-                {
-                  col: 14,
-                  texto: '¿Están limpios los filos después del pulido?',
-                },
-                {
-                  col: 15,
-                  texto: '¿Molduras y emblemas están correctamente instalados?',
-                },
-              ],
-            },
-          ],
-        },
+    ARMADO: {
+      tipo: 'checklist',
+      envios: [
+        {
+          etapaTexto: 'ARMADO',
+          colObservacion: 38,
+          preguntas: [
+            { col: 31, texto: '¿Todas las piezas desmontadas fueron reinstaladas correctamente?' },
+            { col: 32, texto: '¿Grampas, tornillos y fijaciones están completos y correctamente instalados?' },
+            { col: 33, texto: '¿Luces, sensores, cámaras y componentes eléctricos funcionan correctamente?' },
+            { col: 34, texto: '¿Las piezas quedaron bien alineadas y parejas?' },
+            { col: 35, texto: '¿Todo funciona correctamente después del armado?' },
+            { col: 36, texto: '¿El vehículo está listo para Control de Calidad?' },
+            { col: 37, texto: '¿El capó tiene todos sus pernos y fijaciones correctamente ajustados?' }
+          ]
+        }
+      ]
+    },
 
-        // Un solo botón "PREPARACIÓN" que muestra ambos bloques seguidos.
-        // Al guardar se generan 2 filas en RPTA_CALIDAD (MATIZADO / COLOR
-        // y PINTURA / HORNO), tal como las clasifica el script de análisis.
-        PREPARACION: {
-          tipo: 'checklist',
-          envios: [
-            {
-              etapaTexto: 'MATIZADO / COLOR',
-              colObservacion: 23,
-              preguntas: [
-                {
-                  col: 17,
-                  texto:
-                    '¿Se verificó el código, color y variante antes de pintar?',
-                },
-                { col: 18, texto: '¿La fórmula utilizada quedó registrada?' },
-                {
-                  col: 19,
-                  texto: '¿Se realizó la prueba de color antes de pintar?',
-                },
-                { col: 20, texto: '¿El color fue validado antes de pintar?' },
-                {
-                  col: 21,
-                  texto:
-                    '¿El material está correctamente identificado y corresponde a la OT?',
-                },
-                {
-                  col: 22,
-                  texto:
-                    '¿El tono de color quedó correcto, sin exceso de amarillo?',
-                },
-              ],
-            },
-            {
-              etapaTexto: 'PINTURA / HORNO',
-              colObservacion: 30,
-              preguntas: [
-                {
-                  col: 24,
-                  texto: '¿La superficie está limpia antes de pintar?',
-                },
-                {
-                  col: 25,
-                  texto:
-                    '¿La zona quedó correctamente protegida y enmascarada?',
-                },
-                {
-                  col: 26,
-                  texto: '¿El acabado se ve parejo desde todos los ángulos?',
-                },
-                {
-                  col: 27,
-                  texto:
-                    '¿La pintura quedó pareja y uniforme en toda la superficie?',
-                },
-                {
-                  col: 28,
-                  texto: '¿El vehículo tuvo el secado/horneado correcto?',
-                },
-                { col: 29, texto: '¿La pieza está lista para pulido?' },
-              ],
-            },
-          ],
-        },
+    CALIDAD: {
+      tipo: 'checklist',
+      envios: [
+        {
+          etapaTexto: 'CONTROL DE CALIDAD FINAL',
+          colObservacion: 45,
+          preguntas: [
+            { col: 39, texto: 'Reparaciones ejecutadas conforme a OT' },
+            { col: 40, texto: 'Carrocería y pintura sin defectos visibles' },
+            { col: 41, texto: 'Paneles, luces, molduras y accesorios correctamente instalados' },
+            { col: 42, texto: 'Funcionamiento de elementos intervenidos verificado' },
+            { col: 43, texto: 'Lavado, interior/exterior limpio y presentación de entrega correcta' },
+            { col: 44, texto: 'Documentación (técnica, proceso de trabajo, hoja de trabajo y hoja de control final)' },
+            { col: 46, texto: 'Faro delantero LH' },
+            { col: 47, texto: 'Soportes RH y LH de mandiles de guardafangos delanteros' },
+            { col: 48, texto: 'Máscara delantera totalmente raspado y despintado' }
+          ]
+        }
+      ]
+    }
 
-        ARMADO: {
-          tipo: 'checklist',
-          envios: [
-            {
-              etapaTexto: 'ARMADO',
-              colObservacion: 38,
-              preguntas: [
-                {
-                  col: 31,
-                  texto:
-                    '¿Todas las piezas desmontadas fueron reinstaladas correctamente?',
-                },
-                {
-                  col: 32,
-                  texto:
-                    '¿Grampas, tornillos y fijaciones están completos y correctamente instalados?',
-                },
-                {
-                  col: 33,
-                  texto:
-                    '¿Luces, sensores, cámaras y componentes eléctricos funcionan correctamente?',
-                },
-                {
-                  col: 34,
-                  texto: '¿Las piezas quedaron bien alineadas y parejas?',
-                },
-                {
-                  col: 35,
-                  texto: '¿Todo funciona correctamente después del armado?',
-                },
-                {
-                  col: 36,
-                  texto: '¿El vehículo está listo para Control de Calidad?',
-                },
-                {
-                  col: 37,
-                  texto:
-                    '¿El capó tiene todos sus pernos y fijaciones correctamente ajustados?',
-                },
-              ],
-            },
-          ],
-        },
+  };
 
-        CALIDAD: {
-          tipo: 'checklist',
-          envios: [
-            {
-              etapaTexto: 'CONTROL DE CALIDAD FINAL',
-              colObservacion: 45,
-              preguntas: [
-                { col: 39, texto: 'Reparaciones ejecutadas conforme a OT' },
-                {
-                  col: 40,
-                  texto: 'Carrocería y pintura sin defectos visibles',
-                },
-                {
-                  col: 41,
-                  texto:
-                    'Paneles, luces, molduras y accesorios correctamente instalados',
-                },
-                {
-                  col: 42,
-                  texto: 'Funcionamiento de elementos intervenidos verificado',
-                },
-                {
-                  col: 43,
-                  texto:
-                    'Lavado, interior/exterior limpio y presentación de entrega correcta',
-                },
-                {
-                  col: 44,
-                  texto:
-                    'Documentación (técnica, proceso de trabajo, hoja de trabajo y hoja de control final)',
-                },
-                { col: 46, texto: 'Faro delantero LH' },
-                {
-                  col: 47,
-                  texto:
-                    'Soportes RH y LH de mandiles de guardafangos delanteros',
-                },
-                {
-                  col: 48,
-                  texto: 'Máscara delantera totalmente raspado y despintado',
-                },
-              ],
-            },
-          ],
-        },
+  let etapaActual = "";
+  let fotosActuales = [];
+
+
+  function abrirEtapa(etapaKey) {
+
+    etapaActual = etapaKey;
+
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("formulario").style.display = "block";
+    document.getElementById("nombreEtapa").textContent = "Etapa: " + etapaKey;
+
+    const config = ETAPAS[etapaKey];
+    const bloqueSimple = document.getElementById("bloqueSimple");
+    const bloqueChecklist = document.getElementById("bloqueChecklist");
+
+    bloqueChecklist.innerHTML = "";
+
+    if (config.tipo === 'simple') {
+      bloqueSimple.style.display = "block";
+      return;
+    }
+
+    bloqueSimple.style.display = "none";
+    renderChecklist(config, bloqueChecklist);
+
+  }
+
+
+  function renderChecklist(config, contenedor) {
+
+    config.envios.forEach(function (envio, indiceEnvio) {
+
+      const bloque = document.createElement("div");
+      bloque.className = "bloque-checklist";
+      bloque.dataset.envio = indiceEnvio;
+
+      if (config.envios.length > 1) {
+        const h3 = document.createElement("h3");
+        h3.textContent = envio.etapaTexto;
+        bloque.appendChild(h3);
+      }
+
+      envio.preguntas.forEach(function (pregunta) {
+
+        const divPregunta = document.createElement("div");
+        divPregunta.className = "pregunta";
+        divPregunta.dataset.col = pregunta.col;
+
+        const p = document.createElement("p");
+        p.textContent = pregunta.texto;
+        divPregunta.appendChild(p);
+
+        const divOpciones = document.createElement("div");
+        divOpciones.className = "opciones";
+
+        OPCIONES_RESPUESTA.forEach(function (opcion) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "opcion-btn " + opcion.val;
+          btn.textContent = opcion.texto;
+          btn.dataset.valorSheet = opcion.valorSheet;
+          btn.onclick = function () {
+            const botones = divOpciones.querySelectorAll(".opcion-btn");
+            botones.forEach(function (b) { b.classList.remove("activo"); });
+            btn.classList.add("activo");
+          };
+          divOpciones.appendChild(btn);
+        });
+
+        divPregunta.appendChild(divOpciones);
+        bloque.appendChild(divPregunta);
+
+      });
+
+      const labelObs = document.createElement("label");
+      labelObs.textContent = "Observación" + (config.envios.length > 1 ? " (" + envio.etapaTexto + ")" : "");
+      bloque.appendChild(labelObs);
+
+      const textareaObs = document.createElement("textarea");
+      textareaObs.className = "obs-envio";
+      textareaObs.placeholder = "Escribe una observación...";
+      bloque.appendChild(textareaObs);
+
+      contenedor.appendChild(bloque);
+
+    });
+
+  }
+
+
+  function volverMenu() {
+
+    document.getElementById("formulario").style.display = "none";
+    document.getElementById("menu").style.display = "block";
+
+    limpiarFormulario();
+
+  }
+
+
+  function limpiarFormulario() {
+
+    document.getElementById("placa").value = "";
+    document.getElementById("responsable").value = "";
+    document.getElementById("observacionSimple").value = "";
+    document.getElementById("bloqueChecklist").innerHTML = "";
+
+    fotosActuales = [];
+    renderGaleria();
+
+    ocultarMensaje();
+
+  }
+
+
+  function abrirCamara() {
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.capture = "environment";
+
+    input.onchange = function (event) {
+
+      const archivo = event.target.files[0];
+      if (!archivo) return;
+
+      const lector = new FileReader();
+
+      lector.onload = function (e) {
+        fotosActuales.push(e.target.result);
+        renderGaleria();
       };
 
-      let etapaActual = '';
-      let fotoActual = '';
+      lector.readAsDataURL(archivo);
 
-      function abrirEtapa(etapaKey) {
-        etapaActual = etapaKey;
+    };
 
-        document.getElementById('menu').style.display = 'none';
-        document.getElementById('formulario').style.display = 'block';
-        document.getElementById('nombreEtapa').textContent =
-          'Etapa: ' + etapaKey;
+    input.click();
 
-        const config = ETAPAS[etapaKey];
-        const bloqueSimple = document.getElementById('bloqueSimple');
-        const bloqueChecklist = document.getElementById('bloqueChecklist');
+  }
 
-        bloqueChecklist.innerHTML = '';
 
-        if (config.tipo === 'simple') {
-          bloqueSimple.style.display = 'block';
-          return;
-        }
+  function renderGaleria() {
 
-        bloqueSimple.style.display = 'none';
-        renderChecklist(config, bloqueChecklist);
-      }
+    const contenedor = document.getElementById("fotosGaleria");
+    contenedor.innerHTML = "";
 
-      function renderChecklist(config, contenedor) {
-        config.envios.forEach(function (envio, indiceEnvio) {
-          const bloque = document.createElement('div');
-          bloque.className = 'bloque-checklist';
-          bloque.dataset.envio = indiceEnvio;
+    fotosActuales.forEach(function (dataUrl, indice) {
 
-          if (config.envios.length > 1) {
-            const h3 = document.createElement('h3');
-            h3.textContent = envio.etapaTexto;
-            bloque.appendChild(h3);
+      const item = document.createElement("div");
+      item.className = "foto-item";
+
+      const img = document.createElement("img");
+      img.src = dataUrl;
+      item.appendChild(img);
+
+      const btnQuitar = document.createElement("button");
+      btnQuitar.type = "button";
+      btnQuitar.className = "quitar-foto";
+      btnQuitar.textContent = "✕";
+      btnQuitar.onclick = function () { quitarFoto(indice); };
+      item.appendChild(btnQuitar);
+
+      contenedor.appendChild(item);
+
+    });
+
+  }
+
+
+  function quitarFoto(indice) {
+    fotosActuales.splice(indice, 1);
+    renderGaleria();
+  }
+
+
+  function mostrarMensaje(texto, esError) {
+    const el = document.getElementById("mensaje");
+    el.textContent = texto;
+    el.classList.toggle("error", !!esError);
+    el.style.display = "block";
+  }
+
+  function ocultarMensaje() {
+    const el = document.getElementById("mensaje");
+    el.style.display = "none";
+    el.classList.remove("error");
+  }
+
+
+  function guardarRegistro() {
+
+    const placa = document.getElementById("placa").value.trim();
+    const responsable = document.getElementById("responsable").value.trim();
+
+    if (!placa) {
+      alert("Ingresa la placa.");
+      return;
+    }
+
+    if (WEBAPP_URL.indexOf("PEGA_AQUI") !== -1) {
+      alert("Falta configurar WEBAPP_URL con la URL de tu Web App de Apps Script.");
+      return;
+    }
+
+    const config = ETAPAS[etapaActual];
+    let payload;
+
+    if (config.tipo === 'simple') {
+
+      const observacion = document.getElementById("observacionSimple").value.trim();
+
+      payload = {
+        modo: 'simple',
+        fecha: new Date().toISOString(),
+        etapa: etapaActual,
+        placa: placa,
+        responsable: responsable,
+        observacion: observacion,
+        fotos: fotosActuales
+      };
+
+    } else {
+
+      const bloques = document.querySelectorAll("#bloqueChecklist .bloque-checklist");
+
+      const envios = config.envios.map(function (envioConfig, indice) {
+
+        const bloqueDom = bloques[indice];
+        const respuestas = {};
+
+        bloqueDom.querySelectorAll(".pregunta").forEach(function (divPregunta) {
+          const col = divPregunta.dataset.col;
+          const activo = divPregunta.querySelector(".opcion-btn.activo");
+          if (activo) {
+            respuestas[col] = activo.dataset.valorSheet;
           }
-
-          envio.preguntas.forEach(function (pregunta) {
-            const divPregunta = document.createElement('div');
-            divPregunta.className = 'pregunta';
-            divPregunta.dataset.col = pregunta.col;
-
-            const p = document.createElement('p');
-            p.textContent = pregunta.texto;
-            divPregunta.appendChild(p);
-
-            const divOpciones = document.createElement('div');
-            divOpciones.className = 'opciones';
-
-            OPCIONES_RESPUESTA.forEach(function (opcion) {
-              const btn = document.createElement('button');
-              btn.type = 'button';
-              btn.className = 'opcion-btn ' + opcion.val;
-              btn.textContent = opcion.texto;
-              btn.dataset.valorSheet = opcion.valorSheet;
-              btn.onclick = function () {
-                const botones = divOpciones.querySelectorAll('.opcion-btn');
-                botones.forEach(function (b) {
-                  b.classList.remove('activo');
-                });
-                btn.classList.add('activo');
-              };
-              divOpciones.appendChild(btn);
-            });
-
-            divPregunta.appendChild(divOpciones);
-            bloque.appendChild(divPregunta);
-          });
-
-          const labelObs = document.createElement('label');
-          labelObs.textContent =
-            'Observación' +
-            (config.envios.length > 1 ? ' (' + envio.etapaTexto + ')' : '');
-          bloque.appendChild(labelObs);
-
-          const textareaObs = document.createElement('textarea');
-          textareaObs.className = 'obs-envio';
-          textareaObs.placeholder = 'Escribe una observación...';
-          bloque.appendChild(textareaObs);
-
-          contenedor.appendChild(bloque);
         });
-      }
 
-      function volverMenu() {
-        document.getElementById('formulario').style.display = 'none';
-        document.getElementById('menu').style.display = 'block';
+        const observacion = bloqueDom.querySelector(".obs-envio").value.trim();
 
-        limpiarFormulario();
-      }
-
-      function limpiarFormulario() {
-        document.getElementById('placa').value = '';
-        document.getElementById('responsable').value = '';
-        document.getElementById('observacionSimple').value = '';
-        document.getElementById('bloqueChecklist').innerHTML = '';
-
-        document.getElementById('fotoPreview').style.display = 'none';
-        document.getElementById('fotoPreview').src = '';
-
-        ocultarMensaje();
-
-        fotoActual = '';
-      }
-
-      function abrirCamara() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.capture = 'environment';
-
-        input.onchange = function (event) {
-          const archivo = event.target.files[0];
-          if (!archivo) return;
-
-          const lector = new FileReader();
-
-          lector.onload = function (e) {
-            fotoActual = e.target.result;
-            const preview = document.getElementById('fotoPreview');
-            preview.src = fotoActual;
-            preview.style.display = 'block';
-          };
-
-          lector.readAsDataURL(archivo);
+        return {
+          etapaTexto: envioConfig.etapaTexto,
+          colObservacion: envioConfig.colObservacion,
+          respuestas: respuestas,
+          observacion: observacion
         };
 
-        input.click();
-      }
+      });
 
-      function mostrarMensaje(texto, esError) {
-        const el = document.getElementById('mensaje');
-        el.textContent = texto;
-        el.classList.toggle('error', !!esError);
-        el.style.display = 'block';
-      }
+      payload = {
+        modo: 'checklist',
+        fecha: new Date().toISOString(),
+        placa: placa,
+        tecnico: responsable,
+        fotos: fotosActuales,
+        envios: envios
+      };
 
-      function ocultarMensaje() {
-        const el = document.getElementById('mensaje');
-        el.style.display = 'none';
-        el.classList.remove('error');
-      }
+    }
 
-      function guardarRegistro() {
-        const placa = document.getElementById('placa').value.trim();
-        const responsable = document.getElementById('responsable').value.trim();
+    const btnGuardar = document.getElementById("btnGuardar");
+    btnGuardar.disabled = true;
+    btnGuardar.textContent = "Guardando...";
+    ocultarMensaje();
 
-        if (!placa) {
-          alert('Ingresa la placa.');
-          return;
-        }
+    fetch(WEBAPP_URL, {
+      method: "POST",
+      headers: {
+        // text/plain evita el preflight OPTIONS, que Apps Script no maneja
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
 
-        if (WEBAPP_URL.indexOf('PEGA_AQUI') !== -1) {
-          alert(
-            'Falta configurar WEBAPP_URL con la URL de tu Web App de Apps Script.'
-          );
-          return;
-        }
+        btnGuardar.disabled = false;
+        btnGuardar.textContent = "💾 Guardar";
 
-        const config = ETAPAS[etapaActual];
-        let payload;
-
-        if (config.tipo === 'simple') {
-          const observacion = document
-            .getElementById('observacionSimple')
-            .value.trim();
-
-          payload = {
-            modo: 'simple',
-            fecha: new Date().toISOString(),
-            etapa: etapaActual,
-            placa: placa,
-            responsable: responsable,
-            observacion: observacion,
-            foto: fotoActual,
-          };
+        if (data.ok) {
+          mostrarMensaje("Registro guardado correctamente.", false);
+          console.log("Guardado:", data);
+          setTimeout(volverMenu, 1100);
         } else {
-          const bloques = document.querySelectorAll(
-            '#bloqueChecklist .bloque-checklist'
-          );
-
-          const envios = config.envios.map(function (envioConfig, indice) {
-            const bloqueDom = bloques[indice];
-            const respuestas = {};
-
-            bloqueDom
-              .querySelectorAll('.pregunta')
-              .forEach(function (divPregunta) {
-                const col = divPregunta.dataset.col;
-                const activo = divPregunta.querySelector('.opcion-btn.activo');
-                if (activo) {
-                  respuestas[col] = activo.dataset.valorSheet;
-                }
-              });
-
-            const observacion = bloqueDom
-              .querySelector('.obs-envio')
-              .value.trim();
-
-            return {
-              etapaTexto: envioConfig.etapaTexto,
-              colObservacion: envioConfig.colObservacion,
-              respuestas: respuestas,
-              observacion: observacion,
-            };
-          });
-
-          payload = {
-            modo: 'checklist',
-            fecha: new Date().toISOString(),
-            placa: placa,
-            tecnico: responsable,
-            foto: fotoActual,
-            envios: envios,
-          };
+          mostrarMensaje("Error al guardar: " + data.error, true);
         }
 
-        const btnGuardar = document.getElementById('btnGuardar');
-        btnGuardar.disabled = true;
-        btnGuardar.textContent = 'Guardando...';
-        ocultarMensaje();
+      })
+      .catch(function (err) {
 
-        fetch(WEBAPP_URL, {
-          method: 'POST',
-          headers: {
-            // text/plain evita el preflight OPTIONS, que Apps Script no maneja
-            'Content-Type': 'text/plain;charset=utf-8',
-          },
-          body: JSON.stringify(payload),
-        })
-          .then(function (res) {
-            return res.json();
-          })
-          .then(function (data) {
-            btnGuardar.disabled = false;
-            btnGuardar.textContent = '💾 Guardar';
+        btnGuardar.disabled = false;
+        btnGuardar.textContent = "💾 Guardar";
 
-            if (data.ok) {
-              mostrarMensaje('Registro guardado correctamente.', false);
-              console.log('Guardado:', data);
-            } else {
-              mostrarMensaje('Error al guardar: ' + data.error, true);
-            }
-          })
-          .catch(function (err) {
-            btnGuardar.disabled = false;
-            btnGuardar.textContent = '💾 Guardar';
+        mostrarMensaje("No se pudo conectar con el servidor: " + err.message, true);
 
-            mostrarMensaje(
-              'No se pudo conectar con el servidor: ' + err.message,
-              true
-            );
-          });
-      }
-    </script>
-  </body>
+      });
+
+  }
+
+</script>
+
+</body>
 </html>
