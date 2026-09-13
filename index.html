@@ -333,7 +333,7 @@
 
   // ⚠️ PEGA AQUÍ LA URL DE TU WEB APP DE APPS SCRIPT (Code.gs)
   // La obtienes al hacer: Implementar → Nueva implementación → Aplicación web
-  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwYP7Llca693OX3Qj2oKiYfhYKln9oqC4b1NHnkJZzuo2bFS8TqM9u5T5JM8WKaN40VDg/exec";
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwGhl7t1WO1ObulTt56QWGPp87q5l_jZ-xPGR6QLrMramASiVwne-jlN-q1DF5oZ3Rn4A/exec";
 
   const OPCIONES_RESPUESTA = [
     { val: 'si', texto: '✅ Sí', valorSheet: '✅ Sí, lista para pulido' },
@@ -792,9 +792,13 @@
         btnGuardar.textContent = "💾 Guardar";
 
         if (data.ok) {
-          mostrarMensaje("Registro guardado correctamente.", false);
+          if (data.advertenciaFotos) {
+            mostrarMensaje("Registro guardado, pero la foto no se pudo subir: " + data.advertenciaFotos, true);
+          } else {
+            mostrarMensaje("Registro guardado correctamente.", false);
+          }
           console.log("Guardado:", data);
-          setTimeout(volverMenu, 1100);
+          setTimeout(volverMenu, data.advertenciaFotos ? 3000 : 1100);
         } else {
           mostrarMensaje("Error al guardar: " + data.error, true);
         }
